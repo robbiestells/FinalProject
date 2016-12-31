@@ -47,15 +47,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-//        JokeClass jokeClass = new JokeClass();
-//        String jokeString = jokeClass.tellJoke();
-//        Toast.makeText(this, jokeString, Toast.LENGTH_SHORT).show();
-//
-//        Intent intent = new Intent(this, JokeActivity.class);
-//        intent.putExtra("jokeText", jokeString);
-//        startActivity(intent);
+        String jokeString = "";
+        EndpointsAsyncTask task = new EndpointsAsyncTask();
+        try {
+            jokeString = task.execute().get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Intent intent = new Intent(this, JokeActivity.class);
+        intent.putExtra("jokeText", jokeString);
+        startActivity(intent);
 
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
     }
 }
 
