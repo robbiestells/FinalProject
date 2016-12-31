@@ -14,6 +14,10 @@ import com.example.JokeClass;
 import com.udacity.gradle.builditbigger.R;
 import com.example.mylibrary.JokeActivity;
 
+import java.util.concurrent.TimeUnit;
+
+import static junit.framework.Assert.fail;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
         String jokeString = "";
         EndpointsAsyncTask task = new EndpointsAsyncTask();
         try {
-            jokeString = task.execute().get();
+            jokeString = task.execute().get(30, TimeUnit.SECONDS);
         } catch (Exception e) {
-            e.printStackTrace();
+            fail("Timed Out");
         }
         Intent intent = new Intent(this, JokeActivity.class);
         intent.putExtra("jokeText", jokeString);
