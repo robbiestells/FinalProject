@@ -1,7 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
 /**
- * Created by robbi on 12/31/2016.
+ * Created by The Crab on 6/03/2016.
  */
 
 import android.content.Context;
@@ -22,6 +22,7 @@ public class AsyncTaskTest extends  AndroidTestCase{
         super.setUp();
 
         result = null;
+//        task = new EndpointsAsyncTask(mockContext){
         task = new EndpointsAsyncTask(){
             @Override
             protected void onPostExecute(String joke){
@@ -33,11 +34,8 @@ public class AsyncTaskTest extends  AndroidTestCase{
     public void testAsyncReturnType() {
 
         try{
-
-            //Default timeout for the GCM server is 20 seconds
-            //If the .get can't get the result in 10 seconds, something is wrong anyway
-            //Greater than 20 seconds results in an error string returned and requires further interpretation
-            task.execute(mockContext);
+           // task.execute(mockContext);
+            task.execute();
             result = task.get(10, TimeUnit.SECONDS);
             assertNotNull(result);
 

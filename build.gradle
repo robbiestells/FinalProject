@@ -18,3 +18,14 @@ allprojects {
         jcenter()
     }
 }
+
+task runAllTests (dependsOn: ":backend:appengineRun") {
+    project(":backend").afterEvaluate { jokesBackend ->
+        jokesBackend.extensions.appengine.daemon = true
+    }
+    doLast {
+        "app:connectedCheck"
+    }
+}
+
+runAllTests.finalizedBy ":backend:appengineStop"
